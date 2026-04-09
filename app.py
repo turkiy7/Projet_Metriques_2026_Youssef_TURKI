@@ -9,7 +9,7 @@ def index():
     return "Serveur Flask Opérationnel"
 
 # Exercice 1 & 6 : Page de contact stylisée
-@app.route("/contact")
+@app.route("/contact", methods=["GET", "POST"])
 def contact():
     return render_template("contact.html")
 

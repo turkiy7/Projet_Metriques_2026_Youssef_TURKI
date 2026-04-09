@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <script src="https://www.gstatic.com/charts/loader.js"></script>
+  <script>
+    google.charts.load('current', { packages: ['corechart', 'bar'] });
+    google.charts.setOnLoadCallback(drawChart);
+
+    async function drawChart() {
+      const res = await fetch('/paris');
+      const json = await res.json();
+      
+      const rows = json.map(p => {
+        return [p.datetime.replace('T', ' '), Number(p.temperature_c)];
+      });
+
+      const data = new google.visualization.DataTable();
+      data.addColumn('string', 'Date/Heure');
+      data.addColumn('number', 'Température (°C)');
+      data.addRows(rows);
+
+      const options = {
+        title: 'Prévisions Météo Paris - Histogramme',
+        hAxis: { title: 'Date et Heure' },
+        vAxis: { title: 'Température (°C)' },
+        colors: ['#1b9e77']
+      };
+
+      const chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+      chart.draw(data, options);
+    }
+  </script>
+</head>
+<body>
+  <div id="chart_div" style="width: 100%; height: 500px;"></div>
+</body>
+</html>
