@@ -1,7 +1,23 @@
 <!doctype html>
 <html lang="fr">
 <head>
+  <meta charset="utf-8">
+  <title>Températures Paris - Histogramme</title>
   <script src="https://www.gstatic.com/charts/loader.js"></script>
+  <style>
+    /* Design Global */
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f6; margin: 0; color: #333; }
+    
+    /* Barre de navigation */
+    .navbar { background-color: #2c3e50; padding: 15px 30px; display: flex; justify-content: center; gap: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+    .navbar a { color: white; text-decoration: none; padding: 10px 20px; border-radius: 5px; font-weight: bold; transition: background 0.3s, transform 0.2s; }
+    .navbar a:hover { background-color: #3498db; transform: translateY(-2px); }
+    
+    /* Conteneur principal */
+    .container { max-width: 900px; margin: 40px auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.05); }
+    h2 { color: #2c3e50; text-align: center; border-bottom: 2px solid #3498db; padding-bottom: 10px; margin-bottom: 30px; }
+  </style>
+
   <script>
     google.charts.load('current', { packages: ['corechart', 'bar'] });
     google.charts.setOnLoadCallback(drawChart);
@@ -20,10 +36,11 @@
       data.addRows(rows);
 
       const options = {
-        title: 'Prévisions Météo Paris - Histogramme',
-        hAxis: { title: 'Date et Heure' },
+        hAxis: { title: 'Date et Heure', textStyle: {fontSize: 10} },
         vAxis: { title: 'Température (°C)' },
-        colors: ['#1b9e77']
+        colors: ['#1b9e77'],
+        legend: { position: 'none' },
+        chartArea: {width: '85%', height: '60%'}
       };
 
       const chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
@@ -32,6 +49,16 @@
   </script>
 </head>
 <body>
-  <div id="chart_div" style="width: 100%; height: 500px;"></div>
+  <div class="navbar">
+    <a href="/contact">📞 Contact</a>
+    <a href="/rapport">📈 Ligne (Paris)</a>
+    <a href="/histogramme">📊 Histogramme (Paris)</a>
+    <a href="/atelier">💨 Vent (Marseille)</a>
+  </div>
+
+  <div class="container">
+    <h2>Prévisions Météo Paris — Histogramme</h2>
+    <div id="chart_div" style="width: 100%; height: 500px;"></div>
+  </div>
 </body>
 </html>

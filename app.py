@@ -6,7 +6,7 @@ app = Flask(__name__)
 # Route par défaut
 @app.route("/")
 def index():
-    return "Serveur Flask Opérationnel"
+    return render_template("index.html")
 
 # Exercice 1 & 6 : Page de contact stylisée
 @app.route("/contact", methods=["GET", "POST"])
